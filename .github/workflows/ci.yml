@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  Prepare:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ github.run_id }}
+      - name: Install dependencies
+        run: yarn install --immutable
+
+  Build:
+    name: Build project
+    needs: Prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ github.run_id }}
+      - run: yarn build
+      - uses: actions/cache@v2
+        with:
+          path: build
+          key: build-${{ github.run_id }}
+
+  ESLint:
+    name: Check if the code matches ESLint
+    needs: Prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ github.run_id }}
+      - run: eslint --max-warnings=0 .
+
+  Prettier:
+    name: Check if the code matches Prettier
+    needs: Prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ github.run_id }}
+      - run: prettier --list-different .
