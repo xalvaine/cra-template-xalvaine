@@ -10,7 +10,6 @@ on:
 
 jobs:
   Prepare:
-    name: Install dependencies
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -22,7 +21,6 @@ jobs:
         run: yarn install --immutable
 
   Build:
-    name: Build project
     needs: Prepare
     runs-on: ubuntu-latest
     steps:
@@ -38,7 +36,6 @@ jobs:
           key: build-${{ github.run_id }}
 
   ESLint:
-    name: Check if the code matches ESLint
     needs: Prepare
     runs-on: ubuntu-latest
     steps:
@@ -50,7 +47,6 @@ jobs:
       - run: eslint --max-warnings=0 .
 
   Prettier:
-    name: Check if the code matches Prettier
     needs: Prepare
     runs-on: ubuntu-latest
     steps:
