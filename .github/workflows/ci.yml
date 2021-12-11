@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/cache@v2.1.7
         with:
           path: node_modules
           key: node_modules-${{ github.run_id }}
@@ -25,12 +25,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/cache@v2.1.7
         with:
           path: node_modules
           key: node_modules-${{ github.run_id }}
       - run: yarn build
-      - uses: actions/cache@v2
+      - uses: actions/cache@v2.1.7
         with:
           path: build
           key: build-${{ github.run_id }}
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/cache@v2.1.7
         with:
           path: node_modules
           key: node_modules-${{ github.run_id }}
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/cache@v2.1.7
         with:
           path: node_modules
           key: node_modules-${{ github.run_id }}
