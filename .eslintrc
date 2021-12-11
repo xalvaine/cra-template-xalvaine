@@ -47,6 +47,7 @@
             "reservedFirst": true
           }
         ],
+        "quotes": ["warn", "single"],
         "react/jsx-key": "warn"
       }
     }
