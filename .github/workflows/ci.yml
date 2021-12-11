@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2.1.7
+      - uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules-${{ github.run_id }}
+          key: node_modules-${{ hashFiles('./yarn.lock') }}
       - name: Install dependencies
         run: yarn install --immutable
 
@@ -25,12 +25,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2.1.7
+      - uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules-${{ github.run_id }}
+          key: node_modules-${{ hashFiles('./yarn.lock') }}
       - run: yarn build
-      - uses: actions/cache@v2.1.7
+      - uses: actions/cache@v2
         with:
           path: build
           key: build-${{ github.run_id }}
@@ -40,10 +40,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2.1.7
+      - uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules-${{ github.run_id }}
+          key: node_modules-${{ hashFiles('./yarn.lock') }}
       - run: eslint --max-warnings=0 .
 
   Prettier:
@@ -51,8 +51,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2.1.7
+      - uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules-${{ github.run_id }}
+          key: node_modules-${{ hashFiles('./yarn.lock') }}
       - run: prettier --list-different .
