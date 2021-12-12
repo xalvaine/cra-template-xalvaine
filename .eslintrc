@@ -24,13 +24,18 @@
         "import/order": [
           "warn",
           {
+            "pathGroups": [
+              {
+                "pattern": "*.module.css",
+                "patternOptions": { "matchBase": true },
+                "group": "index",
+                "position": "after"
+              }
+            ],
             "groups": [
-              "builtin",
-              "external",
+              ["builtin", "external"],
               "internal",
-              "sibling",
-              "type",
-              "object"
+              ["parent", "sibling", "index"]
             ],
             "newlines-between": "always",
             "alphabetize": {
